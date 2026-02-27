@@ -12,9 +12,11 @@ Route::get('/',[MainController::class,'index'])->name('main');
 
 
 Route::view("sobre_nosotros", "about")->name("about");
-Route::view("noticias", "noticias");
-Route::view("alumnos", "alumnos");
-Route::view("profesores", "profesores");
+Route::view("noticias", "noticias")->name("noticias");
+Route::view("alumnos", "alumnos")->name("alumnos");
+Route::view("profesores", "profesores")->name("profesores");
+
+
 
 
 //Pruebas
