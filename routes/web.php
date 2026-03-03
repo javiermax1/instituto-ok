@@ -16,7 +16,7 @@ Route::view("noticias", "noticias")->name("noticias");
 Route::view("alumnos", "alumnos")->name("alumnos");
 Route::view("profesores", "profesores")->name("profesores");
 Route::view("panel_usuario", "dashboard")->name("dashboard");
-
+Route::view("contacto", "contacto")->name("contacto");
 
 
 

@@ -1,3 +1,3 @@
 <x-layouts.layout>
-    Estoy en noticias
+    <h1>Noticias</h1>
 </x-layouts.layout>

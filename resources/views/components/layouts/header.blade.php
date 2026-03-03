@@ -2,18 +2,21 @@
 <header class="hidden lg:flex flex-row justify-between items-center p-3
 h-header bg-header
 ">
-    <img class="max-h-full" src="{{asset("/images/logo.png")}}" alt="logo">
+    <a href="{{ route('main') }}" class="max-h-full">
+        <img class="h-8 sm:h-10 md:h-16 w-auto" src="{{ asset('images/logo.png') }}" alt="logo">
+    </a>
+
 
     <h1 class=" text-3xl xl:text-5xl text-titulo">{{__("GESTION DE INSTITUTO")}}</h1>
     <div class="space-x-2">
-        <form action="{{route("set_lang")}}" method="POST">
+        <form action="{{route("set_lang")}}" method="POST" class="mt-6 bg-gray-100">
             @csrf
             <select name="lang" id="lang"
                     onchange="this.form.submit()">
                 {{--            HAcer que el option sea un submit--}}
                 <option selected disabled>{{__("Selecciona idioma")}}</option>
                 @foreach(config("langs") as $lang => $detail)
-                    <option value="{{$lang}}">{{$detail['name']}}&nbsp&nbsp&nbsp {{$detail['flag']}}  </option>
+                    <option value="{{$lang}}">{{$detail['name']}} &nbsp&nbsp&nbsp {{$detail['flag']}}  </option>
                 @endforeach
             </select>
         </form>
@@ -31,7 +34,7 @@ h-header bg-header
 
 
             <span class="text-green-800 text-2xl">{{auth()->user()->name}}
-            <form action="{{route("logout")}}" method="POST">
+            <form action="{{route("logout")}}" method="POST" class="mb-6">
                 @csrf
                 <button class="btn btn-primary" type="submit">Logout</button>
             </form>
@@ -97,15 +100,14 @@ h-header bg-header
                 <img class="w-6 h-6 " src="{{asset("/images/language.png")}}" alt="burguer button">
             </label>
             <input type="checkbox" class="peer sr-only" id="menu_lang">
+
             <form action="{{route("set_lang")}}" method="POST" class="hidden peer-checked:flex flex-col absolute left-6 top-0 bg-white p-2">
                 @csrf
-
                 @foreach(config("langs") as $lang => $detail)
-                    <button type="submit" name="lang" value="{{$lang}}">{{$detail['flag']}}  </button>
+                    <button type="submit" name="lang" value="{{$lang}}">{{$detail['flag']}}</button>
                     @endforeach
                     </select>
             </form>
-
         </div>
 
 </header>

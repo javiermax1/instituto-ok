@@ -1,3 +1,3 @@
 <x-layouts.layout>
-    <h1>Sobre el centro</h1>
+    <h1>Contacto</h1>
 </x-layouts.layout>

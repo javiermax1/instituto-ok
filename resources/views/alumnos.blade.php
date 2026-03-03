@@ -1,3 +1,3 @@
 <x-layouts.layout>
-    Estoy en alumnos
+    <h1>Alumnos</h1>
 </x-layouts.layout>
