@@ -20,27 +20,22 @@
     </div>
     @endguest
         @auth
-            @php
-                $cantidad = 8; // cambia a 6 si quieres
-            @endphp
-
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 my-9 mx-9">
-                @for ($i = 1; $i <= $cantidad; $i++)
-                    <div class="card bg-base-100 image-full w-70 shadow-sm min-w-full ">
+                    <div class="card bg-base-100  w-70 shadow-sm min-w-full ">
                         <figure>
                             <img
-                                src="https://img.daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.webp"
-                                alt="Imagen {{ $i }}" />
+{{--                                src{{asset("/images(projects.jpg")}}--}}
+                                src="{{asset("/images/projects.webp")}}"
+                                alt="proyectos" />
                         </figure>
                         <div class="card-body">
-                            <h2 class="card-title">Tarjeta {{ $i }}</h2>
-                            <p>Contenido de la tarjeta número {{ $i }}.</p>
+                            <h2 class="card-title">Gestión de Proyectos</h2>
+                            <p>Realización de CRUD de proyectos</p>
                             <div class="card-actions justify-end">
-                                <button class="btn btn-primary">Acción</button>
+                                <a href="{{route("projects.index")}}"><button class="btn btn-primary">Ver Proyectos</button></a>
                             </div>
                         </div>
                     </div>
-                @endfor
             </div>
         @endauth
 
