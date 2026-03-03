@@ -14,4 +14,12 @@
             </div>
         </div>
     </div>
+
+    <div>
+        <ul>
+            <li>Datos</li>
+            <li>Notificaciones</li>
+            <li>Opciones</li>
+        </ul>
+    </div>
 </x-app-layout>

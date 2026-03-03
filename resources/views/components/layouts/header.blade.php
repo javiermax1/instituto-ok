@@ -4,7 +4,7 @@ h-header bg-header
 ">
     <img class="max-h-full" src="{{asset("/images/logo.png")}}" alt="logo">
 
-    <h1 class="text-5xl text-titulo">{{__("GESTION DE INSTITUTO")}}</h1>
+    <h1 class=" text-3xl xl:text-5xl text-titulo">{{__("GESTION DE INSTITUTO")}}</h1>
     <div class="space-x-2">
         <form action="{{route("set_lang")}}" method="POST">
             @csrf
@@ -25,16 +25,19 @@ h-header bg-header
             <a href="{{route("register")}}">
                 <button class="btn btn-sm btn-primary">{{__("Register")}}</button>
             </a>
-
         @endguest
+
         @auth
-            <span class="text-green-800 text-3xl">{{auth()->user()->name}}
+
+
+            <span class="text-green-800 text-2xl">{{auth()->user()->name}}
             <form action="{{route("logout")}}" method="POST">
                 @csrf
                 <button class="btn btn-primary" type="submit">Logout</button>
             </form>
 
         @endauth
+
     </div>
 
 </header>
@@ -49,6 +52,11 @@ h-header bg-header
 
         @guest
             <div class="relative">
+
+                <input type="checkbox" class="peer sr-only" id="menu_login">
+                <label for="menu_login">
+                    <img class="w-6 h-6 " src="{{asset("/images/burger.png")}}" alt="burguer button">
+                </label>
                 <label for="menu_login" class="fixed inset-0 bg-black/40
                             opacity-0 pointer-events-none
                             peer-checked:opacity-100
@@ -56,10 +64,6 @@ h-header bg-header
                             transition-opacity duration-300
                     "></label>
 
-                <label for="menu_login">
-                    <img class="w-6 h-6 " src="{{asset("/images/hamburger-menu.png")}}" alt="burguer button">
-                </label>
-                <input type="checkbox" class="peer sr-only" id="menu_login">
                 <div class="hidden peer-checked:flex  flex-col  absolute left-8 ">
                     <a href="{{route("login")}}">
                         <button class="btn btn-sm btn-primary">{{__("Login")}}</button>
@@ -70,6 +74,24 @@ h-header bg-header
                 </div>
             </div>
         @endguest
+
+
+        @auth
+            <div class="relative">
+                <input type="checkbox" id="logout" class="peer hidden sr-only">
+                <label for="logout" class="flex flex-row bg-gray-100 p-1 cursor-pointer">
+                    <span class="text-green-800 text-2xl ">{{auth()->user()->name}}</span>
+                    <img src="/images/arrow_down.webp" alt="flecha-icono" class="w-10">
+                </label>
+                <form action="{{route("logout")}}" method="POST" class=" p-2 hidden peer-checked:flex absolute left-8">
+                    @csrf
+                    <button class="btn btn-primary" type="submit">Logout</button>
+                </form>
+            </div>
+
+        @endauth
+
+
         <div class="relative">
             <label for="menu_lang">
                 <img class="w-6 h-6 " src="{{asset("/images/language.png")}}" alt="burguer button">
@@ -79,7 +101,7 @@ h-header bg-header
                 @csrf
 
                 @foreach(config("langs") as $lang => $detail)
-                    <button type="submit" value="{{$lang}}">{{$detail['flag']}}  </button>
+                    <button type="submit" name="lang" value="{{$lang}}">{{$detail['flag']}}  </button>
                     @endforeach
                     </select>
             </form>
@@ -87,4 +109,3 @@ h-header bg-header
         </div>
 
 </header>
-

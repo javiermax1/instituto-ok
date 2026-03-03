@@ -15,7 +15,7 @@
 <x-layouts.nav />
 
 
-<main class="h-main bg-main">
+<main class="lg:h-main bg-main">
     {{$slot}}
 </main>
 <x-layouts.footer />
