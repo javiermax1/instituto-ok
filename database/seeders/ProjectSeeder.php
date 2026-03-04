@@ -13,6 +13,7 @@ class ProjectSeeder extends Seeder
      */
     public function run(): void
     {
+//        php artisan make:
         Project::factory()->count(100)->create();
     }
 }

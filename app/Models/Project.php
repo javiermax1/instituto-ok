@@ -9,4 +9,5 @@ class Project extends Model
 {
     /** @use HasFactory<\Database\Factories\ProjectFactory> */
     use HasFactory;
+    protected $fillable = ['name', 'description', 'hours', 'start_date'];
 }
