@@ -10,4 +10,6 @@ class Project extends Model
     /** @use HasFactory<\Database\Factories\ProjectFactory> */
     use HasFactory;
     protected $fillable = ['name', 'description', 'hours', 'start_date'];
+    //protected $table = 'proyectos';
+    // si el nombre de la tabla fuera proyectos lo definimos arriba
 }

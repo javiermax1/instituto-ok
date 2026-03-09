@@ -9,5 +9,6 @@ class Student extends Model
 {
     // desciende de la clase factory (herencia)
     use HasFactory;
+    protected $fillable = ['name', 'age', 'email', 'dni'];
 
 }

@@ -18,9 +18,9 @@ class studentFactory extends Factory
     {
         return [
             'name' => $this->faker->name(),
-            'address' => $this->faker->address(),
+            'age' => $this->faker->numberBetween(1,90),
             'email' => $this->faker->unique()->safeEmail(),
-            'birthday' => $this->faker->date(),
+            'dni' => $this->faker->numerify(),
         ];
     }
 }

@@ -4,6 +4,8 @@ h-header bg-header
 ">
     <img class="max-h-full" src="{{asset("/images/logo.png")}}" alt="logo">
 
+
+
     <h1 class=" text-3xl xl:text-5xl text-titulo">{{__("GESTION DE INSTITUTO")}}</h1>
     <div class="space-x-2">
         <form action="{{route("set_lang")}}" method="POST">

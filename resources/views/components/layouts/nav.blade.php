@@ -6,6 +6,14 @@ px-5 justify-start items-center lg:space-x-2">
     <a href="{{route("noticias")}}" class="btn btn-glass w-full lg:w-auto">Noticias</a>
     <a href="{{route("alumnos")}}" class="btn btn-glass w-full lg:w-auto">Alumnos</a>
     <a href="{{route("profesores")}}" class="btn btn-glass w-full lg:w-auto">Profesores</a>
+
+    @auth
+        <a href="/proyects">Proyectos</a>
+        <a href="/students">Estudiantes</a>
+        <a href="/teachers">Profesores</a>
+
+    @endauth
+
 </nav>
 
 
