@@ -8,7 +8,7 @@ px-5 justify-start items-center lg:space-x-2">
     <a href="{{route("profesores")}}" class="btn btn-glass w-full lg:w-auto">Profesores</a>
 
     @auth
-        <a href="/proyects">Proyectos</a>
+        <a href="/projects">Proyectos</a>
         <a href="/students">Estudiantes</a>
         <a href="/teachers">Profesores</a>
 

@@ -1,7 +1,7 @@
 
 <x-layouts.layout>
 
-
+    <a href="{{route("students.create")}}" class="btn btn-success p-4">Añadir estudiante</a>
     {{--  div para centra tabla  --}}
     <div class="flex justify-center">
         <div class="overflow-x-auto h-120">
