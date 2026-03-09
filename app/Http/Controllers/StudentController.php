@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreStudentRequest;
 use App\Http\Requests\UpdateStudentRequest;
 use App\Models\Student;
-use App\Models\Teacher;
+
 
 class StudentController extends Controller
 {
@@ -15,8 +15,14 @@ class StudentController extends Controller
     public function index()
     {
         $students = Student::all();
-        //return view('projects.index', compact('projects'));
-        return view('students.index', ['students' => $students]);
+        $campos=[
+            "name"=>"Nombre",
+            "age"=>"Edad",
+            "email"=>"Email",
+            "dni"=>"dni",
+        ];
+        //return view('projects.index', compact('projects', 'campos'));
+        return view('students.index', ['students' => $students, 'campos'=>$campos]);
         // mostrar: display and die
         //dd($projects);
     }

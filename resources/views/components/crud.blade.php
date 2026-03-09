@@ -1,46 +1,48 @@
-<x-layouts.layout>
-{{--Props es Opcional:--}}
 @props([
-    'recurso'=>"", 'campos'=>[], 'filas'=>[]
+    'resource'=>"",
+    'campos'=>[], //Array asociativo con nombre_campos => titulo para la tabla ("start_date"=>"Fecha de comienzo")
+    'filas'=>[] //Un array de objetos
 ])
-    <a href="{{route("$recurso.index")}}" class="btn btn-success p-4">Añadir {{strtoupper($recurso}}</a>
-    {{--  div para centra tabla  --}}
-    <div class="flex justify-center">
-        <div class="overflow-x-auto h-120">
-            <table class="table table-xs table-pin-rows table-pin-cols">
-                <thead>
-                <tr class="lg:text-2xl">
-                    @foreach($campos as $campo)
-                        <th>{{$campo}}</th>
-                    @endforeach
-                </tr>
-                </thead>
-                <tbody>
-                @foreach($filas as $fila)
-                    <tr class="lg:text-sm">
-                        @foreach($fila as $valor)
-                            <td>{{$valor}}</td>
-                        @endforeach
-                        {{--Botón de eliminar item--}}
-                        <td>
-{{--                            TODO <form action="//{{$valor->id)}}" method="POST">--}}
-                                @method('DELETE')
-                                @csrf
-                                <input type="submit" value="Borrar" class="btn btn-secondary"
-                                       onclick="return confirm('¿Seguro que quieres borrar?')"
-                                >
-                            </form>
-                        </td>
-                        <td>
-                            <button class="btn btn-warning">Editar</button>
-                            <a haref="{{route('')}}" class="btn btn-warning">Editar</a>
 
-                        </td>
-                    </tr>
+<a href="{{route("$resource.index")}}" class="btn btn-primary">Añadir {{strtoupper($resource)}}</a>
+<div class="flex justify-center ">
+    <div class="overflow-x-auto h-96 ">
+        <table class="table table-xs table-pin-rows table-pin-cols">
+            <thead>
+            <tr class="lg:text-2xl">
+                @foreach($campos as $campo)
+                    <th>{{$campo}}</th>
                 @endforeach
-                </tbody>
-            </table>
-        </div>
-    </div>
-</x-layouts.layout>
+                <th colspan="3">Acciones</th>
 
+            </tr>
+            </thead>
+            <tbody>
+
+            @foreach($filas as $fila)
+                <tr class="lg:text-sm">
+
+
+                    @foreach($campos as $atributo => $valor)
+                        <td>{{$fila->{$atributo} }}</td>
+                    @endforeach
+                    <td>
+                        <form action="{{route("$resource.destroy",$fila->id)}}" method="POST">
+                            @csrf
+                            @method('DELETE')
+                            <input type="submit" value="Borrar" class="btn btn-warning"
+                                   onclick="return confirm('Seguro que quiers borrar')"
+                            >
+                        </form>
+                    </td>
+                    <td>
+                        <a href="{{route("$resource.edit", $fila->id)}}" class="btn btn-primary">Editar</a>
+                    </td>
+
+                </tr>
+            @endforeach
+
+            </tbody>
+        </table>
+    </div>
+</div>
