@@ -37,7 +37,7 @@
                     <x-slot name="label">{{__("Ver Proyectos")}}</x-slot>
                     <x-slot name="img">{{asset('/images/projects.webp')}}</x-slot>
                     <x-slot name="title">Gestión de Proyectos</x-slot>
-                    <x-slot name="description">Vamos a ver un Crud con los Proyectos</x-slot>
+                    <x-slot name="description">{{__("Vamos a ver un CRUD con los Proyectos")}}</x-slot>
                     <x-slot name="ref">{{route("projects.index")}}</x-slot>
                 </x-card>
                 <x-card :label="__('Ver Proyectos')"
