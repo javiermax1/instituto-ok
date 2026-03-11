@@ -11,6 +11,7 @@ use App\Http\Controllers\TeacherController;
 use App\Http\Controllers\StudentController;
 
 
+
 Route::get('/',[MainController::class,'index'])->name('main');
 
 
@@ -19,12 +20,14 @@ Route::view("noticias", "noticias")->name("noticias");
 Route::view("alumnos", "alumnos")->name("alumnos");
 Route::view("profesores", "profesores")->name("profesores");
 Route::view("panel_usuario", "dashboard")->name("dashboard");
+//Route::view("projects", "projects")->name("proyectos");
+
 
 // Projects Teachers  Students:
 Route::resource("projects", ProjectController::class)-> middleware('auth');;
 Route::resource('teachers', TeacherController::class)-> middleware('auth');
 Route::resource('students', StudentController::class)-> middleware('auth');;
-
+Route::resource('projects', ProjectController::class)-> middleware('auth');
 
 
 

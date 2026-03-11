@@ -24,7 +24,7 @@ class TeacherFactory extends Factory
             "name" => $this->faker->name(),
             "email" => $this->faker->unique()->safeEmail(),
             "phone" => $this->faker->phoneNumber(),
-            "department" => $department
+            "department" => $this->faker->randomElement(config('departments')),
         ];
     }
 }

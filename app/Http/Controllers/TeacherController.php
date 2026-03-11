@@ -14,12 +14,14 @@ class TeacherController extends Controller
     public function index()
     {
         $teachers = Teacher::all();
-        $campos=[
+        // traducción:
+        $campos = Teacher::getLabels();
+        /*$campos=[
             "name"=>"Nombre",
             "Department"=>"Departamento",
             "email"=>"Email",
             "phone"=>"Teléfono",
-        ];
+        ];*/
         //return view('projects.index', compact('projects', 'campos'));
         return view('teachers.index', ['teachers' => $teachers, 'campos'=>$campos]);
         // mostrar: display and die
@@ -39,6 +41,9 @@ class TeacherController extends Controller
      */
     public function store(StoreTeacherRequest $request)
     {
+        $datos = $request->input();
+        Teacher::create($datos);
+        return redirect()->route('teachers.index');
         //
     }
 
@@ -55,6 +60,7 @@ class TeacherController extends Controller
      */
     public function edit(Teacher $teacher)
     {
+        return view('teachers.edit', ['teacher' => $teacher]);
         //
     }
 
@@ -63,6 +69,10 @@ class TeacherController extends Controller
      */
     public function update(UpdateTeacherRequest $request, Teacher $teacher)
     {
+        $datos = $request->input();
+        $teacher->update($datos);
+        return redirect()->route('teachers.index');
+
         //
     }
 
@@ -71,6 +81,8 @@ class TeacherController extends Controller
      */
     public function destroy(Teacher $teacher)
     {
+        $teacher->delete();
+        return redirect()->route('teachers.index');
         //
     }
 }

@@ -4,7 +4,7 @@
     'filas'=>[] //Un array de objetos
 ])
 
-<a href="{{route("$resource.index")}}" class="btn btn-primary">Añadir {{strtoupper($resource)}}</a>
+<a href="{{route("$resource.create")}}" class="btn btn-primary">Añadir {{strtoupper($resource)}}</a>
 <div class="flex justify-center ">
     <div class="overflow-x-auto h-96 ">
         <table class="table table-xs table-pin-rows table-pin-cols">
