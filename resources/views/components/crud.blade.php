@@ -44,5 +44,6 @@
 
             </tbody>
         </table>
+        {{$filas->links("pagination::simple-tailwind")}}
     </div>
 </div>

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreProjectRequest;
 use App\Http\Requests\UpdateProjectRequest;
 use App\Models\Project;
+use App\Models\Teacher;
 
 class ProjectController extends Controller
 {
@@ -13,13 +14,10 @@ class ProjectController extends Controller
      */
     public function index()
     {
-        $projects = Project::all();
-        $campos=[
-            "name"=>"Título",
-            "description"=>"Descripcion",
-            "hours"=>"Horas",
-            "start_date"=>"Fecha de inicio",
-        ];
+        $campos = Project::getLabels();
+        $projects = Project::paginate(6);
+//        $projects = Project::all();
+
         //return view('projects.index', compact('projects','campos));
         return view('projects.index', ['projects' => $projects,'campos'=>$campos]);
         // mostrar: display and die
@@ -42,7 +40,7 @@ class ProjectController extends Controller
 //        $datos['name'] = $_POST['name'];
 //        $datos['description'] = $_POST['description'];
 //        $datos['hours'] = $_POST['status'];
-        $datos = $request->input('project');
+        $datos = $request->input();
         Project::create($datos);
         return redirect()->route('projects.index');
     }
@@ -60,7 +58,7 @@ class ProjectController extends Controller
      */
     public function edit(Project $project)
     {
-        //
+        return view('projects.edit', ['project' => $project]);
     }
 
     /**

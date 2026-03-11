@@ -19,7 +19,7 @@
     />
 </div>
 
-<!-- Description -->
+<!-- Phone -->
 <div class="mt-4">
     <x-input-label for="name" :value="__('Phone')" />
     <x-text-input
@@ -33,7 +33,7 @@
     />
 </div>
 
-<!-- Hours -->
+<!-- Department -->
 <div class="mt-4">
     <x-input-label for="department" :value="__('Department')" />
     <select name="department" >
@@ -51,7 +51,7 @@
     @enderror
 </div>
 
-<!-- Start Date -->
+<!-- Email -->
 <div class="mt-4">
     <x-input-label for="email" :value="__('Email')" />
     <x-text-input

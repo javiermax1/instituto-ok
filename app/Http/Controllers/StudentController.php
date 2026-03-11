@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreStudentRequest;
 use App\Http\Requests\UpdateStudentRequest;
 use App\Models\Student;
+use App\Models\Teacher;
 
 
 class StudentController extends Controller
@@ -14,6 +15,8 @@ class StudentController extends Controller
      */
     public function index()
     {
+        $campos = Student::getLabels();
+        $students = Student::paginate(6);
         $students = Student::all();
         $campos=[
             "name"=>"Nombre",
@@ -56,7 +59,7 @@ class StudentController extends Controller
      */
     public function edit(Student $student)
     {
-        //
+        return view('students.edit', ['student' => $student]);
     }
 
     /**

@@ -2,9 +2,9 @@
 
     <div class="flex justify-center items-center min-h-full bg-gray-200">
 
-        <form method="POST" action="{{ route('studentss.update',$student->id) }}" class="bg-white p-4 rounded-2xl">
-            @method('PATCH')
+        <form method="POST" action="{{ route('students.store') }}" class="bg-white p-4 rounded-2xl">
 @csrf
+
 
 <!-- Name -->
 <div>
@@ -14,6 +14,7 @@
         class="block mt-1 w-full"
         type="text"
         name="name"
+        value="{{$student->name}}"
         :value="$student->name"
         required
     />
@@ -27,13 +28,13 @@
         class="block mt-1 w-full"
         type="text"
         name="age"
-        value="{{old('age')}}"
+        value="{{$student->age}}"
         :value="$student->age"
         required
     />
 </div>
 
-<!-- Email -->
+<!-- email -->
             <div class="mt-4">
                 <x-input-label for="email" :value="__('Email')" />
                 <x-text-input
@@ -41,13 +42,14 @@
                     class="block mt-1 w-full"
                     type="text"
                     name="email"
-                    :value="$students->email"
+                    value="{{$student->email}}"
+                    :value="$student->email"
                 />
             </div>
 
-<!-- DNI-->
+<!-- DNI -->
 <div class="mt-4">
-    <x-input-label for="dni" :value="__('Dni')" />
+    <x-input-label for="email" :value="__('DNI')" />
     <x-text-input
         id="dni"
         class="block mt-1 w-full"
@@ -59,7 +61,7 @@
 
 <div class="flex justify-end mt-6">
     <x-primary-button>
-        {{ __('Edit Student') }}
+        {{ __('Create Student') }}
     </x-primary-button>
 </div>
 

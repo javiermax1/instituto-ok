@@ -14,6 +14,5 @@
             <td>{{$teacher->name}}</td>
             ....
         </tr>
-
     @endforeach
 </table>

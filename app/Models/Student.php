@@ -11,4 +11,8 @@ class Student extends Model
     use HasFactory;
     protected $fillable = ['name', 'age', 'email', 'dni'];
 
+    static public function getLabels(){
+        return __("student");
+    }
+
 }

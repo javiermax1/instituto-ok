@@ -27,6 +27,10 @@
                     class="block mt-1 w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500"
                     rows="3"
                 ></textarea>
+                @error('description')
+                <div class="text-xm text-red-200"> {{$message}}</div>
+                @enderror
+
             </div>
 
             <!-- Hours -->
@@ -39,8 +43,8 @@
                     name="hours"
                     min="0"
                 />
-                @error()
-
+                @error('hours')
+                    <div class="text-xm text-red-200"> {{$message}}</div>
                 @enderror
             </div>
 
@@ -53,6 +57,10 @@
                     type="date"
                     name="start_date"
                 />
+                @error('start_date')
+                <div class="text-xm text-red-200"> {{$message}}</div>
+                @enderror
+
             </div>
 
             <div class="flex justify-end mt-6">
