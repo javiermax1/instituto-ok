@@ -24,6 +24,9 @@ class DatabaseSeeder extends Seeder
         ]);
 
         //$this->call([StudentSeeder::class]);
+        // aquí finalmente definimos los que el seeder de be de crear
+        // php
+        // php artisan migrate:fresh --seed
         $this->call([ProjectSeeder::class, TeacherSeeder::class, StudentSeeder::class]);
 
     }

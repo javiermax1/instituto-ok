@@ -27,7 +27,7 @@ Route::view("panel_usuario", "dashboard")->name("dashboard");
 Route::resource("projects", ProjectController::class)-> middleware('auth');;
 Route::resource('teachers', TeacherController::class)-> middleware('auth');
 Route::resource('students', StudentController::class)-> middleware('auth');;
-Route::resource('projects', ProjectController::class)-> middleware('auth');
+
 
 
 

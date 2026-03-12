@@ -12,6 +12,8 @@ class Project extends Model
     protected $fillable = ['title', 'description', 'hours', 'start_date'];
     //protected $table = 'proyectos';
     // si el nombre de la tabla fuera proyectos lo definimos arriba
+
+    // abajo, está vinculado con lang -> projects
     static public function getLabels(){
         return __("project");
     }
