@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreStudentRequest;
 use App\Http\Requests\UpdateStudentRequest;
 use App\Models\Student;
-use App\Models\Teacher;
+
 
 
 class StudentController extends Controller
@@ -16,14 +16,14 @@ class StudentController extends Controller
     public function index()
     {
         $campos = Student::getLabels();
-        $students = Student::paginate(6);
-        $students = Student::all();
-        $campos=[
+        $students = Student::Paginate(6);
+        //$students = Student::all();
+        /*$campos=[
             "name"=>"Nombre",
             "age"=>"Edad",
             "email"=>"Email",
-            "dni"=>"dni",
-        ];
+            "dni"=>"DNI",
+        ];*/
         //return view('projects.index', compact('projects', 'campos'));
         return view('students.index', ['students' => $students, 'campos'=>$campos]);
         // mostrar: display and die
@@ -36,6 +36,9 @@ class StudentController extends Controller
     public function create()
     {
         return view('students.create');
+        /*$student = new Student(); // objeto vacío
+        return view('students.create', compact('student'));
+        */
     }
 
     /**
@@ -43,7 +46,9 @@ class StudentController extends Controller
      */
     public function store(StoreStudentRequest $request)
     {
-        //
+        $datos = $request->input();
+        Student::create($datos);
+        return redirect()->route('students.index');
     }
 
     /**
@@ -59,7 +64,9 @@ class StudentController extends Controller
      */
     public function edit(Student $student)
     {
-        return view('students.edit', ['student' => $student]);
+        $page = request()->get('page', 1);
+//        return view('students.edit', ['student' => $student]);
+        return view('students.edit', compact('student', 'page'));
     }
 
     /**
@@ -67,6 +74,10 @@ class StudentController extends Controller
      */
     public function update(UpdateStudentRequest $request, Student $student)
     {
+        $page= request()->get('page', 1);
+        $datos = $request->input();
+        $student->update($datos);
+        return redirect()->route('students.index',['page'=>$page]);
         //
     }
 
@@ -75,6 +86,13 @@ class StudentController extends Controller
      */
     public function destroy(Student $student)
     {
-        //
+        $student->delete();
+        return redirect()->route('students.index');
+        //return redirect()->route('teachers.index', ['page' => $page]);
+        $page = request()->get('page');
+        if ($page > $lastpage) {
+            $page --;
+        }
+        //dd($page);
     }
 }

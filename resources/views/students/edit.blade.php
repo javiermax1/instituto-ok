@@ -2,7 +2,7 @@
 
     <div class="flex justify-center items-center min-h-full bg-gray-200">
 
-        <form method="POST" action="{{ route('studentss.update',$student->id) }}" class="bg-white p-4 rounded-2xl">
+        <form method="POST" action="{{ route('students.update',$student->id) }}?page={{request()->get('page')}}" class="bg-white p-4 rounded-2xl">
             @method('PATCH')
 @csrf
 
@@ -27,7 +27,6 @@
         class="block mt-1 w-full"
         type="text"
         name="age"
-        value="{{old('age')}}"
         :value="$student->age"
         required
     />
@@ -41,7 +40,8 @@
                     class="block mt-1 w-full"
                     type="text"
                     name="email"
-                    :value="$students->email"
+                    :value="$student->email"
+                    required
                 />
             </div>
 
@@ -54,6 +54,7 @@
         type="text"
         name="dni"
         :value="$student->dni"
+        required
     />
 </div>
 

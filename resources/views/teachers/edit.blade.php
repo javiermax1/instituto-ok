@@ -2,9 +2,10 @@
 
     <div class="flex justify-center items-center min-h-full bg-gray-200">
 
-        <form method="POST" action="{{ route('teachers.update',$teacher->id) }}" class="bg-white p-4 rounded-2xl">
+        <form method="POST" onsubmit="return confirm ('quieres actualizar este profesor')"  action="{{ route('teachers.update', $teacher->id) }}?page={{request()->get('page') }}" class="bg-white p-4 rounded-2xl">
+            @csrf
             @method('PATCH')
-@csrf
+
 
 <!-- Name -->
 <div>
@@ -14,7 +15,9 @@
         class="block mt-1 w-full"
         type="text"
         name="name"
-        :value="$teacher->name"
+        {{--:value="$teacher->name"--}}
+        value="{{old('name')}}"
+        value="{{$teacher->name}}"
         required
     />
 </div>
@@ -37,12 +40,12 @@
 <div class="mt-4">
     <x-input-label for="department" :value="__('Department')" />
     <select name="department" >
-        @foreach(config("departments") as $departament)
+        @foreach(config("departments") as $department)
             <option
                 @php
-                    echo $departament == $teacher->department? "selected":""
+                    echo $department == $teacher->department? "selected":""
                 @endphp
-            value="{{$departament}}">{{$departament}}</option>
+            value="{{$department}}">{{$department}}</option>
         @endforeach
     </select>
 
@@ -59,6 +62,7 @@
         class="block mt-1 w-full"
         type="text"
         name="email"
+        value="{{old('email')}}"
         :value="$teacher->email"
     />
 </div>

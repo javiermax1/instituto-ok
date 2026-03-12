@@ -13,7 +13,8 @@ class TeacherController extends Controller
      */
     public function index()
     {
-        $teachers = Teacher::paginate(6);
+        $teachers = Teacher::Paginate(6);
+        //$teachers = Teacher::simplePaginate();
         // traducción:
         $campos = Teacher::getLabels();
         /*$campos=[
@@ -34,6 +35,7 @@ class TeacherController extends Controller
     public function create()
     {
         return view('teachers.create');
+
     }
 
     /**
@@ -44,7 +46,7 @@ class TeacherController extends Controller
         $datos = $request->input();
         Teacher::create($datos);
         return redirect()->route('teachers.index');
-        //
+
     }
 
     /**
@@ -60,8 +62,9 @@ class TeacherController extends Controller
      */
     public function edit(Teacher $teacher)
     {
+        $page = request()->get('page');
         return view('teachers.edit', ['teacher' => $teacher]);
-        //
+
     }
 
     /**
@@ -72,8 +75,6 @@ class TeacherController extends Controller
         $datos = $request->input();
         $teacher->update($datos);
         return redirect()->route('teachers.index');
-
-        //
     }
 
     /**
@@ -83,6 +84,11 @@ class TeacherController extends Controller
     {
         $teacher->delete();
         return redirect()->route('teachers.index');
-        //
+        //return redirect()->route('teachers.index', ['page' => $page]);
+        $page = request()->get('page');
+        if ($page > $lastpage) {
+            $page --;
+        }
+        //dd($page);
     }
 }

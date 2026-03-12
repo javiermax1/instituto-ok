@@ -2,7 +2,7 @@
 
     <div class="flex justify-center items-center min-h-full bg-gray-200">
 
-        <form method="POST" action="{{ route('projects.store') }}" class="bg-white p-4 rounded-2xl">
+        <form method="POST" action="{{ route('projects.store') }}?page={{request()->get('page')}}" class="bg-white p-4 rounded-2xl">
 
             @csrf
 
@@ -10,10 +10,11 @@
             <div>
                 <x-input-label for="name" :value="__('Name')" />
                 <x-text-input
-                    id="name"
+                    id="title"
                     class="block mt-1 w-full"
                     type="text"
-                    name="name"
+                    name="title"
+                    :value="old('title')"
                     required
                 />
             </div>
@@ -41,6 +42,7 @@
                     class="block mt-1 w-full"
                     type="number"
                     name="hours"
+                    :value="old('hours')"
                     min="0"
                 />
                 @error('hours')
@@ -56,11 +58,12 @@
                     class="block mt-1 w-full"
                     type="date"
                     name="start_date"
+                    :value="old('start_date')"
+
                 />
                 @error('start_date')
                 <div class="text-xm text-red-200"> {{$message}}</div>
                 @enderror
-
             </div>
 
             <div class="flex justify-end mt-6">
@@ -68,7 +71,6 @@
                     {{ __('Create Project') }}
                 </x-primary-button>
             </div>
-
         </form>
 
     </div>

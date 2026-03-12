@@ -1,8 +1,8 @@
 <?php
 
 return [
-    'title'=> "Title",
-    'description'=> "Description",
-    'hours'=> "Hours",
-    'start_date'=> "Start Date",
+    'title'=> "Título",
+    'description'=> "Descripción",
+    'hours'=> "Horas",
+    'start_date'=> "Fecha de inicio",
 ];

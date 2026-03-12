@@ -2,7 +2,7 @@
 
     <div class="flex justify-center items-center min-h-full bg-gray-200">
 
-        <form method="POST" action="{{ route('teachers.store') }}" class="bg-white p-4 rounded-2xl">
+        <form method="POST" action="{{ route('teachers.store') }}?page={{request()->get('page')}}" class="bg-white p-4 rounded-2xl">
 @csrf
 
 <!-- Name -->
@@ -31,12 +31,12 @@
     />
 </div>
 
-<!-- Hours -->
+<!-- Department -->
 <div class="mt-4">
     <x-input-label for="department" :value="__('Department')" />
     <select name="department" >
-        @foreach(config("departments") as $departament)
-            <option value="{{$departament}}">{{$departament}}</option>
+        @foreach(config("departments") as $department)
+            <option value="{{$department}}">{{$department}}</option>
         @endforeach
     </select>
 

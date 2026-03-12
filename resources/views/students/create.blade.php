@@ -2,7 +2,7 @@
 
     <div class="flex justify-center items-center min-h-full bg-gray-200">
 
-        <form method="POST" action="{{ route('students.store') }}" class="bg-white p-4 rounded-2xl">
+        <form method="POST" action="{{ route('students.store') }}?page={{request()->get('page')}}" class="bg-white p-4 rounded-2xl">
 @csrf
 
 
@@ -14,8 +14,7 @@
         class="block mt-1 w-full"
         type="text"
         name="name"
-        value="{{$student->name}}"
-        :value="$student->name"
+        :value="old('name')"
         required
     />
 </div>
@@ -28,8 +27,7 @@
         class="block mt-1 w-full"
         type="text"
         name="age"
-        value="{{$student->age}}"
-        :value="$student->age"
+        :value="old('old')"
         required
     />
 </div>
@@ -42,8 +40,8 @@
                     class="block mt-1 w-full"
                     type="text"
                     name="email"
-                    value="{{$student->email}}"
-                    :value="$student->email"
+                    :value="old('old')"
+                    required
                 />
             </div>
 
@@ -55,7 +53,8 @@
         class="block mt-1 w-full"
         type="text"
         name="dni"
-        :value="$student->dni"
+        :value="old('old')"
+        required
     />
 </div>
 

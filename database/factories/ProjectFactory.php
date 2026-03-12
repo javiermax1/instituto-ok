@@ -20,7 +20,7 @@ class ProjectFactory extends Factory
         $title = array_rand($projects, 1);
         $project = $projects[$title];
         return [
-            "name" => $title,
+            "title" => $title,
             "description" => $project,
             "hours" => $this->faker->numberBetween(10,200),
             "start_date" => $this->faker->date(),
