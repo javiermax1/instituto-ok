@@ -40,9 +40,16 @@
                             >
                         </form>
                     </td>
-                    <td>
-                        <a href="{{route("$resource.edit", $fila->id)}}?page={{$page}}" class="btn btn-primary">Editar</a>
-                    </td>
+{{--                    <td>--}}
+{{--                       <a href="{{route("$resource.edit", $fila->id)}}?page={{$page}}" class="btn btn-primary">Editar</a>--}}
+{{--                        <a href="{{route("$resource.edit", $fila->id)}}?page={{request()->get('page')}}" class="btn btn-primary">Editar</a>--}}
+{{--                    </td>--}}
+
+                        <td>
+                            <button class="btn btn-primary" onclick="confirmarEditar('{{ route("$resource.edit", $fila->id) }}?page={{ request()->get('page') }}')">
+                                Editar
+                            </button>
+                        </td>
                 </tr>
             @endforeach
 
@@ -52,7 +59,7 @@
     </div>
 </div>
 
-{{--Sweetalert: input button para BORRAR--}}
+{{--SweetAlert: input button para BORRAR--}}
 <script>
     function confirmarDelete(button){
         Swal.fire({
@@ -67,3 +74,20 @@
         );
     }
 </script>
+
+{{--SweetAlert: EDITAR--}}
+<script>
+    function confirmarEditar(url){
+        Swal.fire({
+            title: "¿Quieres editar este registro?",
+            icon: "question",
+            showCancelButton: true,
+            confirmButtonText: "Sí, editar"
+        }).then((result) => {
+            if(result.isConfirmed){
+                window.location.href = url
+            }
+        });
+    }
+</script>
+
