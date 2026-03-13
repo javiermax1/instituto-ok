@@ -7,7 +7,6 @@ use App\Http\Requests\UpdateStudentRequest;
 use App\Models\Student;
 
 
-
 class StudentController extends Controller
 {
     /**
@@ -48,7 +47,8 @@ class StudentController extends Controller
     {
         $datos = $request->input();
         Student::create($datos);
-        return redirect()->route('students.index');
+        $page = Student::paginate(6)->lastPage();
+        return redirect()->route('students.index',['page'=>$page]);
     }
 
     /**
@@ -65,8 +65,9 @@ class StudentController extends Controller
     public function edit(Student $student)
     {
         $page = request()->get('page', 1);
-//        return view('students.edit', ['student' => $student]);
-        return view('students.edit', compact('student', 'page'));
+
+        return view('students.edit', ['student' => $student]);
+        //return view('students.edit', compact('student', 'page'));
     }
 
     /**
@@ -87,12 +88,14 @@ class StudentController extends Controller
     public function destroy(Student $student)
     {
         $student->delete();
-        return redirect()->route('students.index');
-        //return redirect()->route('teachers.index', ['page' => $page]);
         $page = request()->get('page');
-        if ($page > $lastpage) {
+        $lastPage = Student::paginate(6)->lastPage();
+        if ($page > $lastPage) {
             $page --;
         }
+        //dd($student);
+        return redirect()->route('students.index',['page'=>$page]);
+        return redirect()->back();
         //dd($page);
     }
 }

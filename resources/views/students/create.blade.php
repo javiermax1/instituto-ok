@@ -40,7 +40,7 @@
                     class="block mt-1 w-full"
                     type="text"
                     name="email"
-                    :value="old('old')"
+                    :value="old('email')"
                     required
                 />
             </div>

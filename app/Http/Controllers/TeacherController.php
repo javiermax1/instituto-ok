@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreTeacherRequest;
 use App\Http\Requests\UpdateTeacherRequest;
+use App\Models\Student;
 use App\Models\Teacher;
 
 class TeacherController extends Controller
@@ -45,7 +46,8 @@ class TeacherController extends Controller
     {
         $datos = $request->input();
         Teacher::create($datos);
-        return redirect()->route('teachers.index');
+        $page = Teacher::paginate(6)->lastPage();
+        return redirect()->route('teachers.index', ['page'=>$page]);
 
     }
 
@@ -64,6 +66,7 @@ class TeacherController extends Controller
     {
         $page = request()->get('page');
         return view('teachers.edit', ['teacher' => $teacher]);
+        //return view('teachers.edit', compact('teacher', 'page'));
 
     }
 
@@ -72,9 +75,10 @@ class TeacherController extends Controller
      */
     public function update(UpdateTeacherRequest $request, Teacher $teacher)
     {
+        $page= request()->get('page', 1);
         $datos = $request->input();
         $teacher->update($datos);
-        return redirect()->route('teachers.index');
+        return redirect()->route('teachers.index', ['page'=>$page]);
     }
 
     /**
@@ -83,12 +87,15 @@ class TeacherController extends Controller
     public function destroy(Teacher $teacher)
     {
         $teacher->delete();
-        return redirect()->route('teachers.index');
         //return redirect()->route('teachers.index', ['page' => $page]);
         $page = request()->get('page');
+        $lastpage = teacher::paginate(6)->lastPage();
         if ($page > $lastpage) {
             $page --;
         }
+        //dd($teacher);
+        return redirect()->route('teachers.index', ['page'=>$page]);
+        return redirect()->back();
         //dd($page);
     }
 }

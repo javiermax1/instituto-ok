@@ -1,3 +1,6 @@
+@props([
+    'page'=>request()->get('page')
+])
 <x-layouts.layout>
 
     <div class="flex justify-center items-center min-h-full bg-gray-200">
@@ -59,13 +62,27 @@
 </div>
 
 <div class="flex justify-end mt-6">
-    <x-primary-button>
-        {{ __('Edit Student') }}
-    </x-primary-button>
+    <x-href-button onclick="confimarDelete(this)">
+        {{ __('Update Student') }}
+    </x-href-button>
 </div>
 
 </form>
 
 </div>
+    <script>
+        function confimarDelete(button) {
+            Swal.fire({
+                title: "Seguro que quieres actualizar??",
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonText: "Actualizar registro"
+            }).then((result) => {
+                    if (result.isConfirmed)
+                        button.closest('form').submit()
+                }
+            );
+        }
+    </script>
 
 </x-layouts.layout>

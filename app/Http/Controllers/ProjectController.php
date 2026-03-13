@@ -41,7 +41,8 @@ class ProjectController extends Controller
 //        $datos['hours'] = $_POST['status'];
         $datos = $request->input();
         Project::create($datos);
-        return redirect()->route('projects.index');
+        $page = Project::paginate(6)->lastPage();
+        return redirect()->route('projects.index', ['page'=>$page]);
     }
 
     /**
@@ -58,8 +59,8 @@ class ProjectController extends Controller
     public function edit(Project $project)
     {
         $page = request()->get("page", 1);
-        //return view('projects.edit', ['project' => $project]);
-        return view('projects.edit', compact('project', 'page'));
+        return view('projects.edit', ['project' => $project]);
+        //return view('projects.edit', compact('project', 'page'));
     }
 
     /**
@@ -78,14 +79,15 @@ class ProjectController extends Controller
      */
     public function destroy(Project $project)
     {
+        $project->delete();
         $page = request()->get("page", 1);
         $lastpage = Project::paginate()->lastPage();
         if ($page > $lastpage) {
             $page--;
         }
         //dd($project);
-        $project->delete();
         return redirect()->route('projects.index',['page' => $page]);
         return redirect()->back();
+        //dd($page);
     }
 }

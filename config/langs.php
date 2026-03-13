@@ -13,5 +13,10 @@ return [
         "name" => "English",
         "flag" => "🇬🇧"
     ]
+//    "zh" => [
+//        "name" => "中文",
+//        "flag" => "🇨🇳"
+//    ]
 ];
+
 

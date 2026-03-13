@@ -20,7 +20,7 @@ class SetLangMiddleware
         // Si no le dejo el valor que tenga en el fichero de configuración
         info (session()->all());
         $lang = session()->get('lang')?? config('app.locale');
-        info ("Seleccionado idioma $lang");
+        info ("Seleccionado el idioma: $lang");
         //Modifico la variable de mi app global LOCALLE
         app()->setLocale($lang);
 

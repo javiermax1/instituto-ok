@@ -4,7 +4,6 @@
     'filas'=>[],//Un array de objetos
     //Recogemos el valor de la pagina de la que venimos:
     'page'=>request()->get('page'),
-    'page'=>$_GET['page']??1
 ])
 
 
@@ -31,25 +30,27 @@
                         <td>{{$fila->{$atributo} }}</td>
                     @endforeach
                     <td>
-                        <form action="{{route("$resource.destroy",$fila->id)}}?page={{request()->get('page')}}" method="POST">
+                        <form action="{{route("$resource.destroy",$fila->id)}}?page={{$page}}" method="POST">
                             @csrf
                             @method('DELETE')
                             <input type="button" value="Borrar" class="btn btn-warning"
-{{--                                   onclick="return confirm('Seguro que quiers borrar')"--}}
-                                onclick="confirmarDelete(this)"
+                                   {{--                                   onclick="return confirm('Seguro que quiers borrar')"--}}
+                                   onclick="confirmarDelete(this)"
                             >
                         </form>
                     </td>
-{{--                    <td>--}}
-{{--                       <a href="{{route("$resource.edit", $fila->id)}}?page={{$page}}" class="btn btn-primary">Editar</a>--}}
-{{--                        <a href="{{route("$resource.edit", $fila->id)}}?page={{request()->get('page')}}" class="btn btn-primary">Editar</a>--}}
-{{--                    </td>--}}
+                    {{--                    <td>--}}
+                    {{--                       <a href="{{route("$resource.edit", $fila->id)}}?page={{$page}}" class="btn btn-primary">Editar</a>--}}
+                    {{--                        <a href="{{route("$resource.edit", $fila->id)}}?page={{request()->get('page')}}" class="btn btn-primary">Editar</a>--}}
+                    {{--                    </td>--}}
 
-                        <td>
-                            <button class="btn btn-primary" onclick="confirmarEditar('{{ route("$resource.edit", $fila->id) }}?page={{ request()->get('page') }}')">
+                    <td>
+                        <a href="{{route("students.edit", $fila->id)}}?page={{$page}}">
+                            <button class="btn btn-primary">
                                 Editar
                             </button>
-                        </td>
+                        </a>
+                    </td>
                 </tr>
             @endforeach
 
@@ -60,16 +61,17 @@
 </div>
 
 {{--SweetAlert: input button para BORRAR--}}
+{{--SweetAlert: input button para BORRAR--}}
 <script>
-    function confirmarDelete(button){
+    function confirmarDelete(button) {
         Swal.fire({
             title: "Seguro que quieres borrar??",
             icon: "warning",
             showCancelButton: true,
             confirmButtonText: "Borrado definitivo"
-        }).then( (result)=>{
-            if(result.isConfirmed)
-                button.closest('form').submit()
+        }).then((result) => {
+                if (result.isConfirmed)
+                    button.closest('form').submit()
             }
         );
     }
@@ -77,14 +79,14 @@
 
 {{--SweetAlert: EDITAR--}}
 <script>
-    function confirmarEditar(url){
+    function confirmarEditar(url) {
         Swal.fire({
             title: "¿Quieres editar este registro?",
             icon: "question",
             showCancelButton: true,
             confirmButtonText: "Sí, editar"
         }).then((result) => {
-            if(result.isConfirmed){
+            if (result.isConfirmed) {
                 window.location.href = url
             }
         });

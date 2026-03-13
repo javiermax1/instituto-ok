@@ -69,4 +69,19 @@
 
     </div>
 
+    <script>
+        function confimarDelete(button) {
+            Swal.fire({
+                title: "Seguro que quieres actualizar??",
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonText: "Actualizar registro"
+            }).then((result) => {
+                    if (result.isConfirmed)
+                        button.closest('form').submit()
+                }
+            );
+        }
+    </script>
+
 </x-layouts.layout>
