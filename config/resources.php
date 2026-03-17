@@ -7,9 +7,33 @@ return [
     "students" =>[
         "role" => "student",
     ],
-    "users" =>[],
-    "projects"=>[],
-    "tasks" =>[],
+    "users" =>[
+        "fields" =>[
+
+                'name',
+                'demail',
+                'dni',
+                'sphone',
+                'password',
+                'department'
+            ]
+        ],
+    "projects"=>[
+        "fields" =>[
+            'name',
+            'description',
+            'priority',
+            'status'
+        ]
+],
+    "tasks" =>[
+        "fields" =>[
+            'name',
+            'description',
+            'priority',
+            'status'
+        ]
+    ],
     "guests " =>[
         "role" => "guest",
     ]
