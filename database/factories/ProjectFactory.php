@@ -5,7 +5,7 @@ namespace Database\Factories;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Model>
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Project>
  */
 class ProjectFactory extends Factory
 {
@@ -16,14 +16,8 @@ class ProjectFactory extends Factory
      */
     public function definition(): array
     {
-        $projects = config('projects');
-        $title = array_rand($projects, 1);
-        $project = $projects[$title];
         return [
-            "title" => $title,
-            "description" => $project,
-            "hours" => $this->faker->numberBetween(10,200),
-            "start_date" => $this->faker->date(),
+            //
         ];
     }
 }

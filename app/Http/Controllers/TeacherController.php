@@ -13,18 +13,22 @@ class TeacherController extends Controller
      */
     public function index()
     {
-        $teachers = Teacher::Paginate(6);
+        $teachers = User::role('teacher')->paginate(5);
+        $datos = User::getLabels();
+        //$teachers = Teacher::Paginate(6);
         //$teachers = Teacher::simplePaginate();
         // traducción:
-        $campos = Teacher::getLabels();
+        $campos = User::getLabels() ['fields'];
+        $campos[]=User::getLabels() ['department'];
+        $campos[]=User::getLabels() ['rol'] ['teacher'];
         /*$campos=[
             "name"=>"Nombre",
             "Department"=>"Departamento",
             "email"=>"Email",
             "phone"=>"Teléfono",
         ];*/
-        //return view('projects.index', compact('projects', 'campos'));
-        return view('teachers.index', ['teachers' => $teachers, 'campos'=>$campos]);
+        return view('teachers.index', compact('teachers', 'campos', 'table'));
+        //return view('teachers.index', ['teachers' => $teachers, 'campos'=>$campos]);
         // mostrar: display and die
         //dd($projects);
     }

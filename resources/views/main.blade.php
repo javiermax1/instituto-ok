@@ -8,12 +8,6 @@
         <div class="hero-content text-neutral-content text-center">
             <div class="max-w-md">
                 <h1 class="mb-5 text-5xl font-bold">Hello there</h1>
-                <p class="mb-5">
-                    {{date("H:m:s")}}
-
-                    Usuario conectado {{$nombre}}
-                    <h2>Número generado <span class="text-3xl text-red-100  ">{{$numero}}</h2>
-                </p>
                 <button class="btn btn-primary">Get Started</button>
             </div>
         </div>
@@ -21,7 +15,7 @@
     @endguest
         @auth
             <div class="lg:h-main bg-base-200
-        grid
+                        grid
                      grid-cols-1
                      sm:grid-cols-2
                      lg:grid-cols-3
@@ -30,53 +24,17 @@
                      overflow-y-auto">
 
 
-            {{-- Ejemplo de tarjetas --}}
-{{--                PROYECTOS: dos formas posibles:  por <x-slot> y por atributos --}}
+{{--TARJETAS--}}
 
-                <x-card>
-                    <x-slot name="label">{{__("Ver Proyectos")}}</x-slot>
-                    <x-slot name="img">{{asset('/images/projects.webp')}}</x-slot>
-                    <x-slot name="title">Gestión de Proyectos</x-slot>
-                    <x-slot name="description">{{__("Vamos a ver un CRUD con los Proyectos")}}</x-slot>
-                    <x-slot name="ref">{{route("projects.index")}}</x-slot>
+            @foreach (config("resources") as $resource)
+                <x-card :label='__("Ver $resource")'
+                        :img='asset("/images/$resource.jpeg")'
+                        title="Gestión de {{$resource}}"
+                        description="Vamos a ver un Crud de {{$resource}}"
+                        ref="{{route('crud.index', $resource)}}">
                 </x-card>
-                <x-card :label="__('Ver Proyectos')"
-                        :img="asset('/images/projects.webp')"
-                        title="Gestión de Proyectos"
-                        description="Vamos a ver un Crud de los Proyectos"
-                        ref="{{route('projects.index')}}">
-                </x-card>
-
-{{--                ESTUDIANTES: dos formas posibles:  por <x-slot> y por atributos --}}
-                <x-card>
-                    <x-slot name="label">{{__("Ver Estudiantes")}}</x-slot>
-                    <x-slot name="img">{{asset('/images/estudiantes.webp')}}</x-slot>
-                    <x-slot name="title">Gestión de Estudiantes</x-slot>
-                    <x-slot name="description">Vamos a ver un Crud con los Estudiantes</x-slot>
-                    <x-slot name="ref">{{route("students.index")}}</x-slot>
-                </x-card>
-                <x-card :label="__('Ver Estudiantes')"
-                        :img="asset('/images/estudiantes.webp')"
-                        title="Gestión de Estudiantes"
-                        description="Vamos a ver un Crud de los Estudiantes"
-                        ref="{{route('students.index')}}">
-                </x-card>
-
-{{--                ESTUDIANTES: dos formas posibles:  por <x-slot> y por atributos--}}
-                <x-card>
-                    <x-slot name="label">{{__("Ver Profesores")}}</x-slot>
-                    <x-slot name="img">{{asset('/images/profesores.jpeg')}}</x-slot>
-                    <x-slot name="title">Gestión de Profesores</x-slot>
-                    <x-slot name="description">Vamos a ver un Crud con los Profesores</x-slot>
-                    <x-slot name="ref">{{route("teachers.index")}}</x-slot>
-                </x-card>
-                <x-card :label="__('Ver Profesores')"
-                        :img="asset('/images/profesores.jpeg')"
-                        title="Gestión de Profesores"
-                        description="Vamos a ver un Crud de los Profesores"
-                        ref="{{route('teachers.index')}}">
-                </x-card>
-    </div>
+            @endforeach
         @endauth
 
+            </div>
 </x-layouts.layout>

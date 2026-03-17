@@ -4,36 +4,14 @@ use App\Http\Controllers\MainController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LangController;
+use App\Http\Controllers\CrudController;
 
 // Namespaces:
-use App\Http\Controllers\ProjectController;
-use App\Http\Controllers\TeacherController;
-use App\Http\Controllers\StudentController;
 
 
-
-Route::get('/',[MainController::class,'index'])->name('main');
-
-
-Route::view("sobre_nosotros", "about")->name("about");
-Route::view("noticias", "noticias")->name("noticias");
-Route::view("alumnos", "alumnos")->name("alumnos");
-Route::view("profesores", "profesores")->name("profesores");
-Route::view("panel_usuario", "dashboard")->name("dashboard");
-//Route::view("projects", "projects")->name("proyectos");
-
-
-// Projects Teachers  Students:
-Route::resource("projects", ProjectController::class)-> middleware('auth');;
-Route::resource('teachers', TeacherController::class)-> middleware('auth');
-Route::resource('students', StudentController::class)-> middleware('auth');;
-
-
-
-
-//Pruebas
-Route::get("/alumno/{numero?}/{seccion?}", fn($numero =10, $seccion="nada" ) => view("alumno", ["numero" => $numero, "seccion" => $seccion]));
-
+Route::get('/', [MainController::class, 'index'])->name("main");
+Route::view('/about', 'about')->name('about');
+Route::view('/noticias', 'noticias')->name('noticias');
 
 Route::get('/dashboard', function () {
     return view('dashboard');
@@ -46,7 +24,6 @@ Route::middleware('auth')->group(function () {
 });
 
 
-
 require __DIR__ . '/auth.php';
 Route::fallback(function () {
     $url = request()->path();
@@ -55,3 +32,12 @@ Route::fallback(function () {
 //Route::post("set_lang", [LangController::class, "__invoke"]);
 Route::post("set_lang",LangController::class)->name("set_lang");
 
+
+Route::get("{resource}", [CrudController::class, "index"])->name("crud.index");
+Route::get("{resource}/create", [CrudController::class, "create"])->name("crud.create");
+Route::post("{resource}/", [CrudController::class, "store"])->name("crud.store");
+
+Route::delete("{resource}/{id}", [CrudController::class, "destroy"])->name("crud.destroy");
+
+Route::get("{resource}/{id}/edit", [CrudController::class, "edit"])->name("crud.edit");
+Route::put("{resource}/{id}", [CrudController::class, "update"])->name("crud.update");
