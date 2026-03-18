@@ -3,9 +3,8 @@
 namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Support\Str;
-
-
 
 class GenerateModels extends Command
 {
@@ -14,7 +13,6 @@ class GenerateModels extends Command
      *
      * @var string
      */
-    // signature: es el comando: php artisan generate:models
     protected $signature = 'generate:models';
 
     /**
@@ -22,7 +20,7 @@ class GenerateModels extends Command
      *
      * @var string
      */
-    protected $description = 'Crear modelos , factorias y seeder a partir del fichero config/resources.php';
+    protected $description = 'Crear modelos, factories y seeder a partir del fichero config resources.php';
 
     /**
      * Execute the console command.
@@ -33,14 +31,69 @@ class GenerateModels extends Command
         foreach ($resources as $resource=>$data) {
             if (isset($data['role']))
                 continue;
-            $model = Str::studly(Str::singular($resource));
-            // El comando que quiero crear: //php artisan make:model $resource -fms
-            $this->call('make:model', ['name' => $model,
+            $model = Str::studly( Str::singular($resource));
+            $this->call('make:model',
+                ['name' => $model,
                     '--migration' => true,
                     '--factory' => true,
-                    '--seed' => true,]
+                    '--seed' => true,
+                ]
             );
+
+            //Consigo la información que quiero añadir
+
+            $fillable = $this->getStringFillable($data['fields']);
+            $getFields = $this->getStringGetFields($resource);
+
+            //necesito la ubicación completa del fichero del modelo que quiero modificar
+            $modelPath=app_path("Models/$model.php");
+
+            $this->getContentFileModel($modelPath, $fillable, $getFields );
+
+
+            //php artisan make:model $resource -fms
         }
-        $this->info('Modelos generados');
+        $this->info('Models generados');
+        //
     }
+    /**
+     * @param  $fields = 'fields'=>['name','description','priority','status']
+     * ,
+     * @return " protected $fillable = ['name','description','priority','status']
+     *
+     */
+
+    private function getStringFillable(array $fields){
+        $fillable = implode("', '", $fields);
+
+
+        $fillable = "\tprotected \$fillable = ['$fillable'];\n";
+
+        return $fillable;
+
+    }
+    private function getStringGetFields(string $resource){
+        $function =<<<FIN
+        public static function getFilds(){
+            return "__($resource.fields)";
+        }
+FIN;
+        return $function;
+    }
+    private function getContentFileModel(string $modelPath, string $fillable, string $getFields){
+        //Tomamos el contenido completo del fichero
+        //remplazamos la palabra HasFactory; por HasFactory; $fillable $getFields
+        //Escribimo de nuevo en el ficheor en nuevo contenido
+        $content = file_get_contents($modelPath);
+        $searach= "use HasFactory;";
+        $replace = "use HasFactory;\n\n  $fillable\n  $getFields";
+        $content = str_replace($searach, $replace, $content);
+        file_put_contents($modelPath, $content);
+
+
+
+
+    }
+
+
 }

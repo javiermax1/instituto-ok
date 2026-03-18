@@ -17,7 +17,7 @@ class crudController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store($resource, Request $request)
+    public function store(string $resource, Request $request)
     {
         //
     }
@@ -25,7 +25,7 @@ class crudController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show($resource, string $id)
+    public function show(string $resource, string $id)
     {
         //
     }
@@ -33,7 +33,7 @@ class crudController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update($resource, Request $request, string $id)
+    public function update(string $resource, Request $request, string $id)
     {
         //
     }
@@ -41,7 +41,7 @@ class crudController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy($resource, string $id)
+    public function destroy(string $resource, string $id)
     {
         //
     }

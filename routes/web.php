@@ -32,12 +32,13 @@ Route::fallback(function () {
 //Route::post("set_lang", [LangController::class, "__invoke"]);
 Route::post("set_lang",LangController::class)->name("set_lang");
 
+Route::middleware('auth')->group(function () {
+    Route::get("{resource}", [CrudController::class, "index"])->name("crud.index");
+    Route::get("{resource}/create", [CrudController::class, "create"])->name("crud.create");
+    Route::post("{resource}/", [CrudController::class, "store"])->name("crud.store");
 
-Route::get("{resource}", [CrudController::class, "index"])->name("crud.index");
-Route::get("{resource}/create", [CrudController::class, "create"])->name("crud.create");
-Route::post("{resource}/", [CrudController::class, "store"])->name("crud.store");
+    Route::delete("{resource}/{id}", [CrudController::class, "destroy"])->name("crud.destroy");
 
-Route::delete("{resource}/{id}", [CrudController::class, "destroy"])->name("crud.destroy");
-
-Route::get("{resource}/{id}/edit", [CrudController::class, "edit"])->name("crud.edit");
-Route::put("{resource}/{id}", [CrudController::class, "update"])->name("crud.update");
+    Route::get("{resource}/{id}/edit", [CrudController::class, "edit"])->name("crud.edit");
+    Route::put("{resource}/{id}", [CrudController::class, "update"])->name("crud.update");
+});

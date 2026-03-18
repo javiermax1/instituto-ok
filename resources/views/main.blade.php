@@ -25,8 +25,8 @@
 
 
 {{--TARJETAS--}}
-
-            @foreach (config("resources") as $resource)
+{{--@dd(config('resource'))--}}
+            @foreach (config("resources") as $resource =>$data)
                 <x-card :label='__("Ver $resource")'
                         :img='asset("/images/$resource.jpeg")'
                         title="Gestión de {{$resource}}"
