@@ -53,7 +53,7 @@ class GenerateModels extends Command
 
             //php artisan make:model $resource -fms
         }
-        $this->info('Models generados');
+        $this->info('Modelos generados');
         //
     }
     /**
@@ -74,7 +74,7 @@ class GenerateModels extends Command
     }
     private function getStringGetFields(string $resource){
         $function =<<<FIN
-        public static function getFilds(){
+        public static function getFields(){
             return "__($resource.fields)";
         }
 FIN;
@@ -85,9 +85,9 @@ FIN;
         //remplazamos la palabra HasFactory; por HasFactory; $fillable $getFields
         //Escribimo de nuevo en el ficheor en nuevo contenido
         $content = file_get_contents($modelPath);
-        $searach= "use HasFactory;";
+        $search= "use HasFactory;";
         $replace = "use HasFactory;\n\n  $fillable\n  $getFields";
-        $content = str_replace($searach, $replace, $content);
+        $content = str_replace($search, $replace, $content);
         file_put_contents($modelPath, $content);
 
 

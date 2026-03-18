@@ -11,7 +11,7 @@ return [
         "fields" =>[
 
                 'name',
-                'demail',
+                'email',
                 'dni',
                 'sphone',
                 'password',
